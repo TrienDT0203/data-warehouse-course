@@ -1,6 +1,4 @@
--- add and rename 3 columns
-
-SELECT stock_item_id as product_key  
-    , stock_item_name as product_name 
-    , brand as brand_name   
+SELECT cast(stock_item_id as int) product_key  
+    , cast(stock_item_name as string) product_name 
+    , cast(brand as string) brand_name   
 FROM `vit-lam-data.wide_world_importers.warehouse__stock_items`
