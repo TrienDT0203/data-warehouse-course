@@ -1,3 +1,5 @@
+-- add and rename 3 columns
+
 SELECT stock_item_id as product_key  
     , stock_item_name as product_name 
     , brand as brand_name   
