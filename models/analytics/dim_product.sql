@@ -1,4 +1,12 @@
-SELECT cast(stock_item_id as int) product_key  
-    , cast(stock_item_name as string) product_name 
-    , cast(brand as string) brand_name   
-FROM `vit-lam-data.wide_world_importers.warehouse__stock_items`
+with customers__source as (
+  SELECT  *
+  FROM `vit-lam-data.wide_world_importers.sales__customers`
+),
+customers_rename_col as (
+  SELECT  cast(customer_id as int) customer_key
+      , cast(customer_name as string) customer_name 
+  FROM customers__source
+)
+SELECT customer_key
+    , customer_name 
+FROM customers_rename_col
