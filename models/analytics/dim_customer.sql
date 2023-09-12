@@ -7,7 +7,7 @@ customer_category_source as (
       , customer_category_name
   FROM `vit-lam-data.wide_world_importers.sales__customer_categories`
 ),
-buying_group_source as (
+buying_group_source as ( 
   SELECT buying_group_id as buying_group_key
         , buying_group_name
   FROM `vit-lam-data.wide_world_importers.sales__buying_groups`
@@ -22,7 +22,9 @@ customers_rename_col as (
 
 SELECT dim_customer.customer_key
     , dim_customer.customer_name 
+    , customer_category_source.customer_category_key
     , customer_category_source.customer_category_name
+    , buying_group_source.buying_group_key 
     , buying_group_source.buying_group_name 
 FROM customers_rename_col as dim_customer
 LEFT JOIN customer_category_source 
