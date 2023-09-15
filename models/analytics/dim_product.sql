@@ -36,5 +36,5 @@ SELECT product_key
       , coalesce(dim_supplier.supplier_name,"Invalid") as supplier_name
       , is_chiller_stock
 from source_warehouse_stock_items__cast_type as dim_product
-inner join source_dim_supplier as dim_supplier
+left join source_dim_supplier as dim_supplier
   on dim_product.supplier_key = dim_supplier.supplier_key
