@@ -10,8 +10,14 @@ source_dim_supplier as (
 ,source_warehouse_stock_items__rename_col as (
   SELECT stock_item_id as product_key
       , stock_item_name
-      , brand as brand_name
+      , coalesce(brand,"Undefined") as brand_name
       , supplier_id as supplier_key
+      , case 
+        when is_chiller_stock = True then "Chiller Stock"
+        when is_chiller_stock = False then "Not Chiller Stock"
+        when is_chiller_stock is null then "Undefined"
+        else "Invalid"
+        end as is_chiller_stock
   FROM source_warehouse_stock_items
 ),
 source_warehouse_stock_items__cast_type as (
@@ -19,6 +25,7 @@ source_warehouse_stock_items__cast_type as (
       , cast(stock_item_name as string) product_name
       , cast(brand_name as string) brand_name
       , cast(supplier_key as int) supplier_key
+      , cast(is_chiller_stock as string) is_chiller_stock
   FROM source_warehouse_stock_items__rename_col
 )
 
@@ -26,7 +33,8 @@ SELECT product_key
       , product_name
       , brand_name
       , dim_product.supplier_key
-      , dim_supplier.supplier_name
+      , coalesce(dim_supplier.supplier_name,"Invalid") as supplier_name
+      , is_chiller_stock
 from source_warehouse_stock_items__cast_type as dim_product
-left join source_dim_supplier as dim_supplier
+inner join source_dim_supplier as dim_supplier
   on dim_product.supplier_key = dim_supplier.supplier_key
