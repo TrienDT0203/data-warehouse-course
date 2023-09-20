@@ -2,11 +2,6 @@ with fact_sales_order_line as (
   SELECT *
   FROM `vit-lam-data.wide_world_importers.sales__order_lines`
 ),
-stg_sales_order as (
-  SELECT order_id as sales_order_key
-        , customer_id as customer_key
-  FROM `vit-lam-data.wide_world_importers.sales__orders`
-),
 fact_sales_order_line__renamed_column as (
   SELECT order_line_id as sales_order_line_key
       , order_id as sales_order_id_key
@@ -29,6 +24,7 @@ fact_sales_order_line__join_stg_sales_order as (
   SELECT sales_order_line_key
       , tb1.sales_order_id_key
       , tb2.customer_key
+      , tb2.picked_by_person_key
       , product_key
       , quantity
       , unit_price
@@ -40,6 +36,7 @@ fact_sales_order_line__join_stg_sales_order as (
 select sales_order_line_key
       , sales_order_id_key
       , customer_key
+      , picked_by_person_key
       , product_key
       , quantity
       , unit_price
