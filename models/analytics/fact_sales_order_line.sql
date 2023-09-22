@@ -35,7 +35,7 @@ fact_sales_order_line__join_stg_sales_order as (
 )
 select sales_order_line_key
       , sales_order_id_key
-      , customer_key
+      , coalesce(customer_key,-1) customer_key
       , picked_by_person_key
       , product_key
       , quantity

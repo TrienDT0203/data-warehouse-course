@@ -19,6 +19,10 @@ dim_people_union as (
   union all 
   select 0 as people_key
       , "Undefined" as full_name
+  union all 
+  select -1 as people_key
+      , "Error/ Invalid" as full_name
+      
 )
 
 SELECT people_key
