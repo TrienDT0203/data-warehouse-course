@@ -23,10 +23,10 @@ with fact_sales_order_line as (
 
 SELECT fact_order_line.sales_order_line_key
     , fact_order_line.sales_order_id_key
-    , fact_order_header.sales_order_date
     , coalesce(fact_order_header.customer_key,-1) customer_key
     , coalesce(fact_order_header.picked_by_person_key,-1) picked_by_person_key
     , fact_order_line.product_key
+    , fact_order_header.sales_order_date
     , quantity
     , unit_price
     , gross_amount
