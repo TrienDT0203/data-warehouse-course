@@ -25,6 +25,7 @@ SELECT fact_order_line.sales_order_line_key
     , fact_order_line.sales_order_id_key
     , coalesce(fact_order_header.customer_key,-1) customer_key
     , coalesce(fact_order_header.picked_by_person_key,-1) picked_by_person_key
+    , coalesce(fact_order_header.salesperson_person_key,-1) salesperson_person_key
     , fact_order_line.product_key
     , fact_order_header.sales_order_date
     , quantity
