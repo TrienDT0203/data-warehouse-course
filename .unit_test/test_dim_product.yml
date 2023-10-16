@@ -1,0 +1,10 @@
+description: This test is used to check data of dim_product table
+type: dimention
+
+models:
+  - name: dim_product
+    columns:
+    - name: product_key
+      tests:
+        - unique
+        - not_null 
