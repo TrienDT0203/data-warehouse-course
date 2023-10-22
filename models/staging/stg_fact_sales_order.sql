@@ -8,6 +8,7 @@ with source_sales_order as (
               , customer_id as customer_key
               , picked_by_person_id as	picked_by_person_key
               , salesperson_person_id as salesperson_person_key
+              , is_undersupply_backordered
          from source_sales_order
      ),
      sales_order_cast_type as (
@@ -16,6 +17,7 @@ with source_sales_order as (
               , cast(customer_key as int) customer_key
               , cast(picked_by_person_key as int ) picked_by_person_key
               , cast(salesperson_person_key as int ) salesperson_person_key
+              , cast(is_undersupply_backordered as boolean ) is_undersupply_backordered
     from sales_order__rename_col
     )
 
@@ -24,4 +26,9 @@ select sales_order_key
       , customer_key
       , coalesce(picked_by_person_key,0) as picked_by_person_key
       , coalesce(salesperson_person_key,0) as salesperson_person_key
+      , case
+          when is_undersupply_backordered is true then "Undersupply Backorder"
+          when is_undersupply_backordered is false then "Not Undersupply Backorder"
+        else "Undefined"
+        end as is_undersupply_backordered
 from sales_order_cast_type
