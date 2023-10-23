@@ -1,0 +1,32 @@
+description: This test is used to check data of dim_product table
+type: dimention
+
+models:
+  - name: dim_product
+    columns:
+    - name: product_key
+      tests:
+        - unique
+        - not_null 
+    
+    - name: product_name
+      tests:
+        - not_null
+    
+    - name: brand_name
+      tests:
+        - not_null
+
+    - name: supplier_key
+      tests:
+        - not_null
+    
+    - name: supplier_name
+      tests:
+        - not_null
+    
+    - name: is_chiller_stock
+      tests:
+        - not_null
+    
+    
