@@ -19,7 +19,7 @@ with customers__source as (
             when lower(is_on_credit_hold) = "true" then "On Credit Hold"
             when lower(is_on_credit_hold) = "false" then "Not on Credit Hold"
             when is_on_credit_hold is Null then "Undefined"
-            else "Invalid"
+            else "Error/ Invalid"
           end as is_on_credit_hold
     from customers_rename_col
   ),
