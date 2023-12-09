@@ -21,10 +21,15 @@ models:
     - name: customer_category_name
       tests:
         - not_null
+
         
+    - name: buying_group_name
+      tests:
+        - not_null
+
     - name: credit_hold_type
       tests:
         - accepted_values:
             values: ['Not on Credit Hold', 'On Credit Hold','Undefined','Error/ Invalid']
       
-    
+
