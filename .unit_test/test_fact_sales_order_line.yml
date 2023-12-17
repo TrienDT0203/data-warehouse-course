@@ -1,0 +1,71 @@
+description: This test is used to check data of fact_sales_order_line table
+type: dimention
+
+models:
+  - name: fact_sales_order_line
+    columns:
+      - name: sales_order_id_key
+        tests: 
+          - not_null 
+          - relationships:
+              to: ref('stg_fact_sales_order')
+              field: sales_order_key
+
+      - name: sales_order_line_key
+        tests: 
+          - not_null
+          
+      - name: customer_key
+        tests: 
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_key
+
+      - name: picked_by_person_key   
+        tests: 
+          - relationships:
+              to: ref('dim_person')
+              field: people_key
+
+      - name: salesperson_person_key 
+        tests: 
+          - not_null
+          - relationships:
+              to: ref('dim_person')
+              field: people_key
+
+      - name: product_key
+        tests: 
+        - not_null
+        - relationships:
+            to: ref('dim_product')
+            field: product_key
+
+      - name: sales_order_line_indicator_key
+        tests: 
+        - not_null
+        - relationships:
+            to: ref('dim_sales_order_line_indicator')
+            field: sales_order_line_indicator_key
+
+      - name: sales_order_date
+        tests:
+        - not_null 
+        - relationships:
+            to: ref('stg_fact_sales_order')
+            field: sales_order_date
+
+      - name: quantity
+        tests: 
+        - not_null
+
+      - name: unit_price
+        tests: 
+          - not_null
+
+      - name: gross_amount
+        tests: 
+          - not_null
+                            
+          
